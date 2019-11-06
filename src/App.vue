@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="deviceready">
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
@@ -12,6 +12,32 @@ export default {
   name: "app",
   components: {
     HelloWorld
+  },
+  data() {
+    return {
+      deviceready: false
+    };
+  },
+  methods: {
+    onDeviceReady() {
+      console.log("device ready");
+      this.deviceready = true;
+    },
+    isMobile() {
+      const ua = navigator.userAgent.toLowerCase();
+      return (
+        ua.includes("iphone") || ua.includes("ipad") || ua.includes("android")
+      );
+    }
+  },
+  created() {
+    if (this.isMobile()) {
+      console.log("mobile");
+      document.addEventListener("deviceready", this.onDeviceReady, false);
+    } else {
+      console.log("not mobile");
+      this.deviceready = true;
+    }
   }
 };
 </script>

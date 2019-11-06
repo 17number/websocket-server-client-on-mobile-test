@@ -1,17 +1,18 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <div id="app"></div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+// TODO: 上手く動作しない
+import * as WebSocketServer from "ws/lib/websocket-server";
+// import * as WebSocketServer from "isomorphic-ws/lib/websocket-server";
+// const WebSocket = require('isomorphic-ws');
+const wss = new WebSocketServer({ port: 8888 });
 
 export default {
   name: "app",
-  components: {
-    HelloWorld
+  mounted() {
+    console.log({ WebSocketServer: WebSocketServer, wss: wss });
   }
 };
 </script>
